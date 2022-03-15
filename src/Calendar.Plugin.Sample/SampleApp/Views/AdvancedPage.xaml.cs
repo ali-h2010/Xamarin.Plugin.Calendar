@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System.Globalization;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace SampleApp.Views
@@ -9,6 +10,19 @@ namespace SampleApp.Views
         public AdvancedPage()
         {
             InitializeComponent();
+
+            var test = AdvanceCalendar;
+
+            CultureInfo current = CultureInfo.CurrentCulture;
+            CultureInfo clone = (CultureInfo)current.Clone();
+
+            string[] CustomDayNames = { "abc", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat" };
+
+            clone.DateTimeFormat.AbbreviatedDayNames = CustomDayNames;
+
+            clone.DateTimeFormat.FirstDayOfWeek = System.DayOfWeek.Sunday;
+
+            AdvanceCalendar.Culture = clone;//new System.Globalization.CultureInfo("ar-SY");
         }
     }
 }

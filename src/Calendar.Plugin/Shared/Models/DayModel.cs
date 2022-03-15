@@ -67,6 +67,18 @@ namespace Xamarin.Plugin.Calendar.Models
                             nameof(BackgroundFullEventColor));
         }
 
+        public bool IsWeekendWithoutEvent
+        {
+            get => GetProperty<bool>();
+            set => SetProperty(value)
+                    .Notify(nameof(TextColor),
+                            nameof(BackgroundColor),
+                            nameof(OutlineColor),
+                            nameof(EventColor),
+                            nameof(BackgroundFullEventColor));
+        }
+        
+
         public bool OtherMonthIsVisible
         {
             get => GetProperty(true);
@@ -135,6 +147,15 @@ namespace Xamarin.Plugin.Calendar.Models
         public Color EventIndicatorColor
         {
             get => GetProperty(Color.FromHex("#FF4081"));
+            set => SetProperty(value)
+                    .Notify(nameof(EventColor),
+                            nameof(BackgroundColor),
+                            nameof(BackgroundFullEventColor));
+        }
+
+        public Color WeekendWithoutEventColor
+        {
+            get => GetProperty(Color.FromHex("#e6e7e8"));
             set => SetProperty(value)
                     .Notify(nameof(EventColor),
                             nameof(BackgroundColor),
@@ -213,13 +234,14 @@ namespace Xamarin.Plugin.Calendar.Models
             {
                 if (!IsVisible) return DeselectedBackgroundColor;
 
-                return (BackgroundEventIndicator, IsSelected, IsToday) switch
+                return (BackgroundEventIndicator, IsSelected, IsToday,IsWeekendWithoutEvent) switch
                 {
-                    (true, false, _) => EventIndicatorColor,
-                    (true, true, _) => EventIndicatorSelectedColor,
-                    (false, true, _) => SelectedBackgroundColor,
-                    (false, false, true) => TodayFillColor,
-                    (_, _, _) => DeselectedBackgroundColor
+                    (true, false, _,_) => EventIndicatorColor,
+                    (true, true, _,_) => EventIndicatorSelectedColor,
+                    (false, true, _, _) => SelectedBackgroundColor,
+                    (false, false, true, _) => TodayFillColor,
+                    (_, _, _, true) => WeekendWithoutEventColor,
+                    (_, _, _,_) => DeselectedBackgroundColor
                 };
             }
         }

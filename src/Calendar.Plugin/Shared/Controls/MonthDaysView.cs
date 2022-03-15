@@ -625,15 +625,34 @@ namespace Xamarin.Plugin.Calendar.Controls
             {
                 var currentDate = firstDate.AddDays(addDays++);
                 var dayModel = dayView.BindingContext as DayModel;
-
                 dayModel.Date = currentDate.Date;
                 dayModel.DayTappedCommand = DayTappedCommand;
-                dayModel.EventIndicatorType = EventIndicatorType;
-                dayModel.DayViewSize = DayViewSize;
+                dayModel.EventIndicatorType = EventIndicatorType;                
                 dayModel.DayViewCornerRadius = DayViewCornerRadius;
                 dayModel.DaysLabelStyle = DaysLabelStyle;
-                dayModel.IsThisMonth = (CalendarLayout != WeekLayout.Month) || currentDate.Month == ShownDate.Month;
                 dayModel.OtherMonthIsVisible = (CalendarLayout != WeekLayout.Month) || OtherMonthDayIsVisible;
+                dayModel.IsThisMonth = (CalendarLayout != WeekLayout.Month) || currentDate.Month == ShownDate.Month;
+                if(dayModel.OtherMonthIsVisible)
+                {
+                    dayModel.DayViewSize = DayViewSize;
+                }
+                else
+                {
+                    if (!dayModel.IsThisMonth)
+                    {
+                        dayModel.DayViewSize = 0;
+                    }
+                    else
+                    {
+                        dayModel.DayViewSize = DayViewSize;
+                    }
+                }
+
+                if(dayModel.Date.DayOfWeek == DayOfWeek.Friday || dayModel.Date.DayOfWeek == DayOfWeek.Saturday)
+                {
+                    dayModel.IsWeekendWithoutEvent = true;
+                }
+
                 dayModel.HasEvents = Events.ContainsKey(currentDate);
                 dayModel.IsDisabled = currentDate < MinimumDate || currentDate > MaximumDate;
 

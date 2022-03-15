@@ -11,7 +11,7 @@
         BackgroundColor="{Binding BackgroundColor}"
         CornerRadius="{Binding DayViewCornerRadius}"
         HeightRequest="{Binding DayViewSize}"
-        OutlineColor="{Binding OutlineColor}"
+        OutlineColor="LightGray"
         WidthRequest="{Binding DayViewSize}"
         HorizontalOptions="Center"
         Padding="0"
