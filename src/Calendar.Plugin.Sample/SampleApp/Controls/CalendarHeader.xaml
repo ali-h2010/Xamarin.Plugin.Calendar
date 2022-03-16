@@ -23,7 +23,7 @@
             Grid.Column="0"
             Padding="0"
             BackgroundColor="White"
-            BorderColor="Orange"
+            BorderColor="Transparent"
             CornerRadius="18"
             HasShadow="False"
             HeightRequest="36"
@@ -52,7 +52,7 @@
             FontAttributes="Bold"
             FontSize="Medium"
             HorizontalOptions="Center"
-            TextColor="{Binding LayoutUnitLabelColor}"
+            TextColor="#009fdf"
             VerticalOptions="Center">
             <Label.FormattedText>
                 <FormattedString>
@@ -67,7 +67,7 @@
             Grid.Column="2"
             Padding="0"
             BackgroundColor="White"
-            BorderColor="Orange"
+            BorderColor="Transparent"
             CornerRadius="18"
             HasShadow="False"
             HeightRequest="36"

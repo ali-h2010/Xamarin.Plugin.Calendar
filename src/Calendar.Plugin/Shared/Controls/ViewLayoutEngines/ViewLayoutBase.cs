@@ -43,28 +43,64 @@ namespace Xamarin.Plugin.Calendar.Shared.Controls.ViewLayoutEngines
                 RowDefinitions = new RowDefinitionCollection()
                 {
                     new RowDefinition(){
+                        Height = 1,
+                    },
+                    new RowDefinition(){
                         Height = daysTitleHeight
+                    },
+                     new RowDefinition(){
+                        Height = 1,
                     },
                 }
             };
+
+
+            BoxView boxView_top_of_weekdays = new BoxView()
+            {
+                HeightRequest = 1,
+                BackgroundColor = Color.FromHex("#ebebeb"),
+               
+            };
+
+            Grid.SetRow(boxView_top_of_weekdays, 0);
+            Grid.SetColumnSpan(boxView_top_of_weekdays, 7);
+
+            grid.Children.Add(boxView_top_of_weekdays);
+
 
             for (int i = 0; i < _numberOfDaysInWeek; i++)
             {
                 var label = new Label()
                 {
                     TextColor = daysTitleColor,
+                    TextTransform = TextTransform.None,
                     Style = daysTitleLabelStyle,
                     HorizontalTextAlignment = TextAlignment.Center,
+                    VerticalOptions = LayoutOptions.Center,
+                    
                 };
-                Grid.SetRow(label, 0);
+                Grid.SetRow(label, 1);
                 Grid.SetColumn(label, i);
 
                 grid.Children.Add(label);
             }
 
+
+            BoxView boxView_bottom_of_weekdays = new BoxView()
+            {
+                HeightRequest = 1,
+                BackgroundColor = Color.FromHex("#ebebeb"),
+
+            };
+
+            Grid.SetRow(boxView_bottom_of_weekdays, 2);
+            Grid.SetColumnSpan(boxView_bottom_of_weekdays, 7);
+
+            grid.Children.Add(boxView_bottom_of_weekdays);
+
             dayViews.Clear();
 
-            for (int i = 1; i <= numberOfWeeks; i++)
+            for (int i = 3; i <= numberOfWeeks +2; i++)
             {
                 grid.RowDefinitions.Add(new RowDefinition()
                 {
