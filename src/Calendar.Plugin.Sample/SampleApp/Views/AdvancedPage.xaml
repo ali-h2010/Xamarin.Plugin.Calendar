@@ -15,7 +15,7 @@
         <local:AdvancedPageViewModel />
     </ContentPage.BindingContext>
 
-    <plugin:Calendar
+    <plugin:Calendar        
         x:Name="AdvanceCalendar"
         ShowMonthPicker="True"
         Padding="10,0"
@@ -36,7 +36,7 @@
         EventIndicatorColor="#FFCD00"
         EventIndicatorSelectedColor="#1976D2"
         EventIndicatorSelectedTextColor="AliceBlue"
-        EventIndicatorTextColor="WhiteSmoke"
+        EventIndicatorTextColor="#4D4D4D"
         EventIndicatorType="Background"
         Events="{Binding Events}"
         HeaderSectionVisible="True"
@@ -57,7 +57,7 @@
         SwipeUpCommand="{Binding SwipeUpCommand}"
         SwipeUpToHideEnabled="False"
         TodayFillColor="#4D4D4D"
-        TodayOutlineColor="DarkGray"
+        TodayOutlineColor="#E6E7E8"
         TodayTextColor="White"
         VerticalOptions="FillAndExpand"
         YearLabelColor="#009fdf">

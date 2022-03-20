@@ -224,9 +224,27 @@ namespace Xamarin.Plugin.Calendar.Models
                                  ? EventIndicatorSelectedColor
                                  : EventIndicatorColor;
 
-        public Color OutlineColor => IsToday && !IsSelected
-                                   ? TodayOutlineColor
-                                   : Color.Transparent;
+        //public Color OutlineColor => IsToday && !IsSelected
+        //                           ? TodayOutlineColor
+        //                           : Color.Transparent;
+
+        public Color OutlineColor
+        {
+            get
+            {
+                if (!IsVisible) return TodayOutlineColor;
+
+                return (BackgroundEventIndicator, IsSelected, IsToday, IsWeekendWithoutEvent) switch
+                {
+                    (true, false, _, _) => EventIndicatorColor,
+                    (true, true, _, _) => EventIndicatorSelectedColor,
+                    (false, true, _, _) => Color.Gray,
+                    (false, false, true, _) => TodayFillColor,
+                    (_, _, _, true) => TodayOutlineColor,
+                    (_, _, _, _) => TodayOutlineColor
+                };
+            }
+        }
 
         public Color BackgroundColor
         {
@@ -236,7 +254,8 @@ namespace Xamarin.Plugin.Calendar.Models
 
                 return (BackgroundEventIndicator, IsSelected, IsToday,IsWeekendWithoutEvent) switch
                 {
-                    (true, false, _,_) => EventIndicatorColor,
+                    (true, false, false, true) => WeekendWithoutEventColor,
+                    (true, false, _,_) => Color.Transparent,
                     (true, true, _,_) => EventIndicatorSelectedColor,
                     (false, true, _, _) => SelectedBackgroundColor,
                     (false, false, true, _) => TodayFillColor,

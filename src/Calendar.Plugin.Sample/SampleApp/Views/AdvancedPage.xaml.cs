@@ -16,7 +16,7 @@ namespace SampleApp.Views
             CultureInfo current = CultureInfo.CurrentCulture;
             CultureInfo clone = (CultureInfo)current.Clone();
 
-            string[] CustomDayNames = { "abc", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat" };
+            string[] CustomDayNames = { "Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat" };
 
             clone.DateTimeFormat.AbbreviatedDayNames = CustomDayNames;
 
